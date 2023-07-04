@@ -1,0 +1,9 @@
+{% extends 'review/base.html' %}
+{% block content %}
+    <h2>Ajouter un billet</h2>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >Envoyer</button>
+    </form>
+{% endblock content %}

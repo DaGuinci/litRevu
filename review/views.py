@@ -23,3 +23,17 @@ def hello_world(request):
                   'review/hello.html'
                   )
 
+@login_required
+def add_review(request):
+    form = forms.CreateReviewForm()
+    if request.method == 'POST':
+        form = forms.CreateReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            # TODO populate rating and ticket
+            review.rating = 0
+            # review.ticket_id = 0
+            review.save()
+            return redirect('home')
+    return render(request, 'review/add_review.html', context={'form': form})

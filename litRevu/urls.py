@@ -32,5 +32,6 @@ urlpatterns = [
         name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', views.signup_page, name='signup'),
+    path('add-review/', views.add_review, name='add_review'),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

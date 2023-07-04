@@ -30,27 +30,12 @@ python xxx.py
 
 * Lancer le serveur
 
-``` bach
+``` bash
 /projectLab python manage.py runserver
 ```
 
-## Commandes utiles
-
-* Desactiver environnement virtuel :
+* Si besoin de modifier les styles, installer [sass](https://sass-lang.com/install/)
 
 ``` bash
-deactivate
-```
-
-* Sauvegarder dépendances
-
-``` bash
-pip freeze > requirements.txt
-```
-
-* Mettre à jour la base de données
-
-``` bash
-python manage.py makemigrations
-python manage.py migrate
+sass static/styles/styles.scss static/styles/styles.css --watch
 ```

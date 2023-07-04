@@ -20,17 +20,17 @@ from django.contrib.auth.views import (
     LogoutView
     )
 from django.urls import include, path
-from review import views as review_views
-from authentication import views as auth_views
+from review import views
+# from authentication import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', review_views.hello_world, name='home'),
+    path('', views.hello_world, name='home'),
     path('login/', LoginView.as_view(
-        template_name='authentication/login.html',
+        template_name='review/login.html',
         redirect_authenticated_user=True),
         name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('signup/', auth_views.signup_page, name='signup'),
+    path('signup/', views.signup_page, name='signup'),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

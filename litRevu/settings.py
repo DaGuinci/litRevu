@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_browser_reload',
     'review',
-    'authentication'
+    # 'authentication'
 ]
 
 MIDDLEWARE = [
@@ -125,8 +125,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-AUTH_USER_MODEL = 'authentication.User'
-
+# AUTH_USER_MODEL = 'authentication.User'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = LOGIN_URL

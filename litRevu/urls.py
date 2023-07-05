@@ -27,7 +27,7 @@ from review import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.hello_world, name='home'),
+    path('', views.home, name='home'),
     path('login/', LoginView.as_view(
         template_name='review/login.html',
         redirect_authenticated_user=True),
@@ -36,6 +36,11 @@ urlpatterns = [
     path('signup/', views.signup_page, name='signup'),
     path('add-review/', views.add_review, name='add_review'),
     path('add-ticket/', views.add_ticket, name='add_ticket'),
+    path(
+        'add-review-to/<int:ticket_id>',
+        views.add_review_to,
+        name='add_review_to'
+        ),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
 if settings.DEBUG:

@@ -19,20 +19,19 @@ def signup_page(request):
 
 
 @login_required
-def hello_world(request):
+def home(request):
     # reviews = models.Review.objects.filter(
     #     uploader__in=request.user.follows.all()
     #     ).exclude(blog__in=blogs)
     reviews = Review.objects.all()
     tickets = Ticket.objects.all()
-    for ticket in tickets:
-        ticket.save()
     return render(request,
                   'review/home.html',
                   {'reviews': reviews,
                    'tickets': tickets}
                   )
 
+# TODO ajouter argument id ticket pour si liaison ticket
 @login_required
 def add_review(request):
     form = forms.CreateReviewForm()
@@ -41,13 +40,22 @@ def add_review(request):
         if form.is_valid():
             review = form.save(commit=False)
             review.user = request.user
-            # TODO populate rating and ticket
-            review.rating = 0
-            # review.ticket_id = 0
             review.save()
             return redirect('home')
     return render(request, 'review/add_review.html', context={'form': form})
 
+def add_review_to(request, ticket_id):
+    form = forms.CreateReviewForm()
+    if request.method == 'POST':
+        form = forms.CreateReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            # TODO populate ticket
+            review.ticket_id = ticket_id
+            review.save()
+            return redirect('home')
+    return render(request, 'review/add_review.html', context={'form': form})
 
 @login_required
 def add_ticket(request):

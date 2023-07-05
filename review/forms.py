@@ -19,12 +19,22 @@ class SignupForm(UserCreationForm):
 
 class CreateReviewForm(forms.ModelForm):
     class Meta:
+        CHOICES = [
+            ('1', 1),
+            ('2', 2),
+            ('3', 3),
+            ('4', 4),
+            ('5', 5),
+        ]
         model = models.Review
         exclude = [
             'user',
-            'rating',
             'ticket'
             ]
+        widgets = {
+            "rating": forms.RadioSelect(choices=CHOICES)
+        }
+
 
 class CreateTicketForm(forms.ModelForm):
     class Meta:

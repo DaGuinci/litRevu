@@ -23,6 +23,7 @@ class Ticket(models.Model):
         super().save(*args, **kwargs)
         self.resize_image()
 
+
 class Review(models.Model):
     ticket = models.ForeignKey(
         to=Ticket,

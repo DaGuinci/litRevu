@@ -5,10 +5,14 @@
 <h1>Hello world !</h1>
 <p>Bonjour {{ user }}</p>
 
+<a href="{% url 'add_review' %}">Ajouter une critique</a>
+<a href="{% url 'add_ticket' %}">Demander une critique</a>
+
 <h3>Votre flux</h3>
 {% for review in reviews %}
 <h4>{{ review.headline }}</h4>
 <p>Rédigé par {{ review.user }} </p>
+<p>Note: {{ review.rating }} </p>
 <p>{{ review.body }}</p>
 {% endfor %}
 
@@ -19,9 +23,8 @@
 <div>
     <img src=" {{ ticket.image.url }} " alt="">
 </div>
-{% endfor %}
+<a href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
 
-<a href="{% url 'add_review' %}">Ajouter une critique</a>
-<a href="{% url 'add_ticket' %}">Ajouter un ticket</a>
+{% endfor %}
 
 {% endblock %}

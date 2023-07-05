@@ -25,6 +25,8 @@ def hello_world(request):
     #     ).exclude(blog__in=blogs)
     reviews = Review.objects.all()
     tickets = Ticket.objects.all()
+    for ticket in tickets:
+        ticket.save()
     return render(request,
                   'review/home.html',
                   {'reviews': reviews,

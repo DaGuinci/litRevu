@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from review import forms
+from review.models import Review, Ticket
 from django.contrib.auth import login
 
 
@@ -19,8 +20,15 @@ def signup_page(request):
 
 @login_required
 def hello_world(request):
+    # reviews = models.Review.objects.filter(
+    #     uploader__in=request.user.follows.all()
+    #     ).exclude(blog__in=blogs)
+    reviews = Review.objects.all()
+    tickets = Ticket.objects.all()
     return render(request,
-                  'review/hello.html'
+                  'review/home.html',
+                  {'reviews': reviews,
+                   'tickets': tickets}
                   )
 
 @login_required
@@ -37,3 +45,16 @@ def add_review(request):
             review.save()
             return redirect('home')
     return render(request, 'review/add_review.html', context={'form': form})
+
+
+@login_required
+def add_ticket(request):
+    form = forms.CreateTicketForm()
+    if request.method == 'POST':
+        form = forms.CreateTicketForm(request.POST, request.FILES)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            return redirect('home')
+    return render(request, 'review/add_ticket.html', context={'form': form})

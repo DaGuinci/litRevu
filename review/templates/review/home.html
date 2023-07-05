@@ -1,0 +1,27 @@
+{% extends 'review/base.html' %}
+
+{% block content %}
+
+<h1>Hello world !</h1>
+<p>Bonjour {{ user }}</p>
+
+<h3>Votre flux</h3>
+{% for review in reviews %}
+<h4>{{ review.headline }}</h4>
+<p>Rédigé par {{ review.user }} </p>
+<p>{{ review.body }}</p>
+{% endfor %}
+
+{% for ticket in tickets %}
+<h4>{{ ticket.title }}</h4>
+<p>Rédigé par {{ ticket.user }} </p>
+<p>{{ ticket.description }}</p>
+<div>
+    <img src=" {{ ticket.image.url }} " alt="">
+</div>
+{% endfor %}
+
+<a href="{% url 'add_review' %}">Ajouter une critique</a>
+<a href="{% url 'add_ticket' %}">Ajouter un ticket</a>
+
+{% endblock %}

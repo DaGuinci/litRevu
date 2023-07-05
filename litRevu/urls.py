@@ -15,6 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth.views import (
     LoginView,
     LogoutView
@@ -33,5 +35,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', views.signup_page, name='signup'),
     path('add-review/', views.add_review, name='add_review'),
+    path('add-ticket/', views.add_ticket, name='add_ticket'),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

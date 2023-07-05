@@ -25,3 +25,11 @@ class CreateReviewForm(forms.ModelForm):
             'rating',
             'ticket'
             ]
+
+class CreateTicketForm(forms.ModelForm):
+    class Meta:
+        model = models.Ticket
+        exclude = [
+            'user',
+            'time_created',
+            ]

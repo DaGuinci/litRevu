@@ -1,5 +1,47 @@
+body,
+h1,
+h2,
+h3,
+h4,
+ul,
+p,
+a {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
 body {
-  color: violet;
+  color: #d1d3c9;
+  background-color: #0b2431;
+}
+
+p,
+li,
+a {
+  font-size: 1.2rem;
+}
+
+.main_container .header {
+  padding: 45px 10px;
+  background-color: #000000;
+}
+.main_container .header__container {
+  display: flex;
+  align-items: center;
+}
+.main_container .header__container div,
+.main_container .header__container ul {
+  width: 45%;
+}
+.main_container .header__container h1 {
+  text-align: center;
+}
+.main_container .header__container ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  list-style: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

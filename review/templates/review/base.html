@@ -4,9 +4,26 @@
     <head><title>LITRevu</title></head>
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
     <body>
-        {% block content %}{% endblock %}
-        {% if user.is_authenticated %}
-            <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
-        {% endif %}
+        <div class="main_container">
+            <div class="header">
+                <div class="header__container">
+                    <div class="header__container__right"></div>
+                    <h1 class="header__container__title">LITRevu</h1>
+                    <ul class="header__container__menu">
+                        <li>
+                            <a href="{% url 'home' %}">Flux</a>
+                        </li>
+                        <li>Posts</li>
+                        <li>Abonnements</li>
+                        <li>
+                            <a href="{% url 'logout' %}">Se déconnecter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% block content %}{% endblock %}
+            {% if user.is_authenticated %}
+            {% endif %}
+        </div>
     </body>
 </html>

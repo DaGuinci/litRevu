@@ -1,3 +1,4 @@
-body {
-    color: violet;
-}
+@import 'src/variables';
+@import 'src/admin';
+@import 'src/components/buttons';
+@import 'src/partials/base';

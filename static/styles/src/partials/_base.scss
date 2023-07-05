@@ -1,0 +1,28 @@
+.main_container{
+
+    .header{
+        padding: 45px 10px;
+        background-color: $black;
+
+        &__container{
+            display: flex;
+            align-items: center;
+
+            div,
+            ul{
+                width: 45%;
+            }
+
+            h1{
+                text-align: center;
+            }
+
+            ul{
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
+                list-style: none;
+            }
+        }
+    }
+}

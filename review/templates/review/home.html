@@ -21,12 +21,12 @@
                 <div class="reviewBlock__headline__rate">
                     {% for star in review.rate_iterator %}
                     <div class="star"
-                    style="background-image: url('{% static 'images/filled_star.png' %}')">
+                    style="mask-image: url('{% static 'images/filled_star.png' %}')">
                     </div>
                     {% endfor %}
                     {% for star in review.unrate_iterator %}
                     <div class="star"
-                    style="background-image: url('{% static 'images/empty_star.png' %}')">
+                    style="mask-image: url('{% static 'images/empty_star.png' %}')">
                     </div>
                     {% comment %} <img src="{% static 'images/empty_star.png' %}" alt=""> {% endcomment %}
                     {% endfor %}

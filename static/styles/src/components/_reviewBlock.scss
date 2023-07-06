@@ -1,3 +1,4 @@
+
 .reviewBlock{
     display: flex;
     flex-direction: column;
@@ -5,6 +6,16 @@
     width: 100%;
     padding: 20px;
     border: 1px solid white;
+    animation: fadein 1s;
+    @keyframes fadein {
+        0% {
+            translate: -100px 0;
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 
     &__infos{
         display: flex;
@@ -18,11 +29,14 @@
 
         &__rate{
             display: flex;
+            gap: 5px;
+
             .star{
                 width: 25px;
                 height: 25px;
-                background-repeat: no-repeat;
-                background-size: cover;
+                mask-repeat: no-repeat;
+                mask-size: cover;
+                background-color: $secondary2;
             }
         }
     }

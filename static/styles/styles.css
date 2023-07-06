@@ -28,10 +28,18 @@ h3 {
 
 .btn {
   display: flex;
-  padding: 15px 10px;
+  padding: 25px 20px;
   color: #d1d3c9;
   text-decoration: none;
-  border: 1px solid white;
+  border: 1px solid #670280;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  transition: all 250ms linear;
+}
+.btn:hover {
+  background-color: #670280;
+  translate: -5px -5px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .reviewBlock {
@@ -41,6 +49,16 @@ h3 {
   width: 100%;
   padding: 20px;
   border: 1px solid white;
+  animation: fadein 1s;
+}
+@keyframes fadein {
+  0% {
+    translate: -100px 0;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .reviewBlock__infos {
   display: flex;
@@ -53,12 +71,14 @@ h3 {
 }
 .reviewBlock__headline__rate {
   display: flex;
+  gap: 5px;
 }
 .reviewBlock__headline__rate .star {
   width: 25px;
   height: 25px;
-  background-repeat: no-repeat;
-  background-size: cover;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  background-color: #EEB258;
 }
 
 .content {

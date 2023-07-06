@@ -1,0 +1,30 @@
+.reviewBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid white;
+
+    &__infos{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__headline{
+        display: flex;
+        align-items: flex-end;
+        gap: 20px;
+
+        &__rate{
+            display: flex;
+            .star{
+                width: 25px;
+                height: 25px;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        }
+    }
+
+}

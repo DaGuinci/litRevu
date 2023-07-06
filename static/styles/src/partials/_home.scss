@@ -1,0 +1,21 @@
+.content__home{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    width: 1000px;
+
+    &__buttons{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    &__feed{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        width: 100%;
+    }
+}

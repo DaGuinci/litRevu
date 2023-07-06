@@ -1,29 +1,53 @@
 {% extends 'review/base.html' %}
+{% load static %}
 
 {% block content %}
 
-<h2>Bonjour {{ user }}</h2>
+<div class="content__home">
+    <div class="content__home__buttons">
+        <a class='btn' href="{% url 'add_review' %}">Ajouter une critique</a>
+        <a class='btn' href="{% url 'add_ticket' %}">Demander une critique</a>
+    </div>
 
-<a href="{% url 'add_review' %}">Ajouter une critique</a>
-<a href="{% url 'add_ticket' %}">Demander une critique</a>
+    <div class="content__home__feed">
+        {% for review in reviews %}
+        <div class="reviewBlock">
+            <div class="reviewBlock__infos">
+                <p>{{ review.user }} a publié une critique</p>
+                <p> {{ review.time_created }} </p>
+            </div>
+            <div class="reviewBlock__headline">
+                <h3>{{ review.headline }}</h3>
+                <div class="reviewBlock__headline__rate">
+                    {% for star in review.rate_iterator %}
+                    <div class="star"
+                    style="background-image: url('{% static 'images/filled_star.png' %}')">
+                    </div>
+                    {% endfor %}
+                    {% for star in review.unrate_iterator %}
+                    <div class="star"
+                    style="background-image: url('{% static 'images/empty_star.png' %}')">
+                    </div>
+                    {% comment %} <img src="{% static 'images/empty_star.png' %}" alt=""> {% endcomment %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="reviewBlock__body">
+                <p>{{ review.body }}</p>
+            </div>
+        </div>
+        {% endfor %}
 
-<h3>Votre flux</h3>
-{% for review in reviews %}
-<h4>{{ review.headline }}</h4>
-<p>Rédigé par {{ review.user }} </p>
-<p>Note: {{ review.rating }} </p>
-<p>{{ review.body }}</p>
-{% endfor %}
-
-{% for ticket in tickets %}
-<h4>{{ ticket.title }}</h4>
-<p>Rédigé par {{ ticket.user }} </p>
-<p>{{ ticket.description }}</p>
-<div>
-    <img src=" {{ ticket.image.url }} " alt="">
+        {% for ticket in tickets %}
+        <h4>{{ ticket.title }}</h4>
+        <p>Rédigé par {{ ticket.user }} </p>
+        <p>{{ ticket.description }}</p>
+        <div>
+            <img src=" {{ ticket.image.url }} " alt="">
+        </div>
+        <a href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
+        {% endfor %}
+    </div>
 </div>
-<a href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
-
-{% endfor %}
 
 {% endblock %}

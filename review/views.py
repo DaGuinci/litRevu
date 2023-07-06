@@ -24,6 +24,12 @@ def home(request):
     #     uploader__in=request.user.follows.all()
     #     ).exclude(blog__in=blogs)
     reviews = Review.objects.all()
+
+    # préparer des iterateurs pour les etoiles dans le html
+    for review in reviews:
+        review.rate_iterator = range(review.rating)
+        review.unrate_iterator = range(5 - review.rating)
+
     tickets = Ticket.objects.all()
     return render(request,
                   'review/home.html',

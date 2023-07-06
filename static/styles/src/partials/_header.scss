@@ -1,0 +1,47 @@
+.header{
+    background-color: $black;
+    height: 100px;
+
+    a{
+        display: flex;
+        align-items: center;                        height: 100%;
+        color: $textCol;
+        text-decoration: none;
+    }
+
+    &__container{
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        div,
+        ul{
+            width: 45%;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        ul{
+            display: flex;
+            height: 100%;
+            justify-content: flex-end;
+            align-items: center;
+            list-style: none;
+
+            li{
+                display: flex;
+                align-items: center;
+                height: 100%;
+                padding: 0 15px;
+                color: $textCol;
+                transition: background-color 250ms linear;
+
+                &:hover{
+                    background-color: $secondary;
+                }
+            }
+        }
+    }
+}

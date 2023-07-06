@@ -22,26 +22,112 @@ a {
   font-size: 1.2rem;
 }
 
-.main_container .header {
-  padding: 45px 10px;
-  background-color: #000000;
+h3 {
+  font-size: 2rem;
 }
-.main_container .header__container {
+
+.btn {
+  display: flex;
+  padding: 15px 10px;
+  color: #d1d3c9;
+  text-decoration: none;
+  border: 1px solid white;
+}
+
+.reviewBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid white;
+}
+.reviewBlock__infos {
+  display: flex;
+  justify-content: space-between;
+}
+.reviewBlock__headline {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+.reviewBlock__headline__rate {
+  display: flex;
+}
+.reviewBlock__headline__rate .star {
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 75px;
+}
+
+.header {
+  background-color: #000000;
+  height: 100px;
+}
+.header a {
   display: flex;
   align-items: center;
+  height: 100%;
+  color: #d1d3c9;
+  text-decoration: none;
 }
-.main_container .header__container div,
-.main_container .header__container ul {
+.header__container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.header__container div,
+.header__container ul {
   width: 45%;
 }
-.main_container .header__container h1 {
+.header__container h1 {
   text-align: center;
 }
-.main_container .header__container ul {
+.header__container ul {
   display: flex;
+  height: 100%;
   justify-content: flex-end;
-  gap: 10px;
+  align-items: center;
   list-style: none;
+}
+.header__container ul li {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 15px;
+  color: #d1d3c9;
+  transition: background-color 250ms linear;
+}
+.header__container ul li:hover {
+  background-color: #670280;
+}
+
+.content__home {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+  width: 1000px;
+}
+.content__home__buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.content__home__feed {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  width: 100%;
 }
 
 /*# sourceMappingURL=styles.css.map */

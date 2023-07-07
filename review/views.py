@@ -65,15 +65,24 @@ def home(request):
 # TODO ajouter argument id ticket pour si liaison ticket
 @login_required
 def add_review(request):
-    form = forms.CreateReviewForm()
+    review_form = forms.CreateReviewForm()
+    ticket_form = forms.CreateTicketForm()
     if request.method == 'POST':
-        form = forms.CreateReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
+        review_form = forms.CreateReviewForm(request.POST)
+        ticket_form = forms.CreateTicketForm(request.POST, request.FILES)
+        if all([review_form.is_valid(), ticket_form.is_valid()]):
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            review = review_form.save(commit=False)
             review.user = request.user
+            review.ticket = ticket
             review.save()
             return redirect('home')
-    return render(request, 'review/add_review.html', context={'form': form})
+    return render(request, 'review/add_review.html', context={
+        'review_form': review_form,
+        'ticket_form': ticket_form
+        })
 
 def add_review_to(request, ticket_id):
     form = forms.CreateReviewForm()

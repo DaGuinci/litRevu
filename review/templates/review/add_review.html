@@ -1,8 +1,11 @@
 {% extends 'review/base.html' %}
 {% block content %}
     <h2>Ajouter une critique</h2>
-    <form method="post">
-        {{ form.as_p }}
+    <form method="post" enctype='multipart/form-data'>
+        <h4 class="subtitle">Livre / article concerné</h4>
+        {{ ticket_form.as_p }}
+        <h4 class="subtitle">Critique</h4>
+        {{ review_form.as_p }}
         {% csrf_token %}
         <button type="submit" >Envoyer</button>
     </form>

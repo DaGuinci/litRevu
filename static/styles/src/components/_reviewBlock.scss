@@ -5,7 +5,10 @@
     gap: 30px;
     width: 100%;
     padding: 20px;
-    border: 1px solid white;
+    border: 1px solid $textCol;
+    border-top-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+
     animation: fadein 1s;
     @keyframes fadein {
         0% {
@@ -41,4 +44,20 @@
         }
     }
 
+    &__body{
+        display: flex;
+        flex-direction: column;
+
+        .thumbnail{
+            margin: 30px 0 0 30px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            min-width: 150px;
+            height: 300px;
+        }
+
+        .btn{
+            align-self: flex-end;
+        }
+    }
 }

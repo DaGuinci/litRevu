@@ -28,7 +28,6 @@
                     <div class="star"
                     style="mask-image: url('{% static 'images/empty_star.png' %}')">
                     </div>
-                    {% comment %} <img src="{% static 'images/empty_star.png' %}" alt=""> {% endcomment %}
                     {% endfor %}
                 </div>
             </div>
@@ -39,13 +38,27 @@
         {% endfor %}
 
         {% for ticket in tickets %}
-        <h4>{{ ticket.title }}</h4>
-        <p>Rédigé par {{ ticket.user }} </p>
-        <p>{{ ticket.description }}</p>
-        <div>
-            <img src=" {{ ticket.image.url }} " alt="">
+        <div class="reviewBlock">
+            <div class="reviewBlock__infos">
+                <p>{{ ticket.user }} a demandé une critique</p>
+                <p>{{ ticket.time_created }}</p>
+            </div>
+            <div class="reviewBlock__headline">
+                <h3>{{ ticket.title }}</h3>
+            </div>
+            <div class="reviewBlock__body">
+                {% if ticket.description %}
+                <p>{{ ticket.description }}</p>
+                {% endif %}
+                {% if ticket.image %}
+                <div class="thumbnail"
+                style="background-image: url('{{ ticket.image.url }}')"
+                >
+                </div>
+                {% endif %}
+                <a class="btn" href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
+            </div>
         </div>
-        <a href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
         {% endfor %}
     </div>
 </div>

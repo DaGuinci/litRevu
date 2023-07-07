@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
+
+from itertools import chain
+
 from review import forms
 from review.models import Review, Ticket
-from django.contrib.auth import login
-
 
 def signup_page(request):
     form = forms.SignupForm()
@@ -16,6 +19,23 @@ def signup_page(request):
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, 'review/signup.html', context={'form': form})
+
+
+def log_user_in(request):
+    form = forms.LoginForm()
+    if request.method == 'POST':
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request,'Nom d\'utilisateur ou mot de passe incorrect')
+                return redirect('login')
+    return render(request, 'review/login.html', context={'form': form})
 
 
 @login_required
@@ -31,10 +51,15 @@ def home(request):
         review.unrate_iterator = range(5 - review.rating)
 
     tickets = Ticket.objects.all()
+
+    posts = sorted(
+        chain(reviews, tickets),
+        key=lambda instance: instance.time_created,
+        reverse=True
+        )
     return render(request,
                   'review/home.html',
-                  {'reviews': reviews,
-                   'tickets': tickets}
+                  {'posts': posts}
                   )
 
 # TODO ajouter argument id ticket pour si liaison ticket

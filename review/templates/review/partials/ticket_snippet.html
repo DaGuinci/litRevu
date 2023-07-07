@@ -1,0 +1,21 @@
+<div class="reviewBlock">
+    <div class="reviewBlock__infos">
+        <p>{{ ticket.user }} a demandé une critique</p>
+        <p>{{ ticket.time_created }}</p>
+    </div>
+    <div class="reviewBlock__headline">
+        <h3>{{ ticket.title }}</h3>
+    </div>
+    <div class="reviewBlock__body">
+        {% if ticket.description %}
+        <p>{{ ticket.description }}</p>
+        {% endif %}
+        {% if ticket.image %}
+        <div class="thumbnail"
+        style="background-image: url('{{ ticket.image.url }}')"
+        >
+        </div>
+        {% endif %}
+        <a class="btn" href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
+    </div>
+</div>

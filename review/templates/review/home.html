@@ -1,5 +1,6 @@
 {% extends 'review/base.html' %}
 {% load static %}
+{% load blog_extras %}
 
 {% block content %}
 
@@ -10,6 +11,14 @@
     </div>
 
     <div class="content__home__feed">
+        {% for post in posts %}
+            {% if post|model_type == 'Review' %}
+                {% include 'review/partials/review_snippet.html' with review=post %}
+            {% elif post|model_type == 'Ticket' %}
+                {% include 'review/partials/ticket_snippet.html' with ticket=post %}
+            {% endif %}
+        {% endfor %}
+
         {% for review in reviews %}
         <div class="reviewBlock">
             <div class="reviewBlock__infos">

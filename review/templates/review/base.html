@@ -4,6 +4,7 @@
     <head><title>LITRevu</title></head>
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
     <body>
+        {% if user.is_authenticated %}
         <div class="header">
             <div class="header__container">
                 <div class="header__container__right"></div>
@@ -24,6 +25,7 @@
                 </ul>
             </div>
         </div>
+        {% endif %}
         <div class="content">
             {% block content %}{% endblock %}
             {% if user.is_authenticated %}

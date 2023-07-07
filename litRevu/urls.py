@@ -28,10 +28,11 @@ from review import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('login/', LoginView.as_view(
-        template_name='review/login.html',
-        redirect_authenticated_user=True),
-        name='login'),
+    # path('login/', LoginView.as_view(
+    #     template_name='review/login.html',
+    #     redirect_authenticated_user=True),
+    #     name='login'),
+    path('login/', views.log_user_in, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', views.signup_page, name='signup'),
     path('add-review/', views.add_review, name='add_review'),

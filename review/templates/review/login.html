@@ -1,10 +1,22 @@
 {% extends 'review/base.html' %}
 {% block content %}
-    <h2>Connexion</h2>
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >Se connecter</button>
-    </form>
-    <p>Pas encore membre ? <a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></p>
+<div class="content__loginSection">
+    <div class="content__loginSection__signup">
+        <h2>Inscrivez-vous maintenant</h2>
+        <a class="btn" href="{% url 'signup' %}">S'inscrire</a>
+    </div>
+    <div class="content__loginSection__signin">
+        <h2>Connexion</h2>
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" >Se connecter</button>
+        </form>
+    </div>
+</div>
 {% endblock content %}

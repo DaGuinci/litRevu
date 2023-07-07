@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="reviewBlock">
+    <div class="reviewBlock__infos">
+        <p>{{ review.user }} a publié une critique</p>
+        <p> {{ review.time_created }} </p>
+    </div>
+    <div class="reviewBlock__headline">
+        <h3>{{ review.headline }}</h3>
+        <div class="reviewBlock__headline__rate">
+            {% for star in review.rate_iterator %}
+            <div class="star"
+            style="mask-image: url('{% static 'images/filled_star.png' %}')">
+            </div>
+            {% endfor %}
+            {% for star in review.unrate_iterator %}
+            <div class="star"
+            style="mask-image: url('{% static 'images/empty_star.png' %}')">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="reviewBlock__body">
+        <p>{{ review.body }}</p>
+    </div>
+</div>

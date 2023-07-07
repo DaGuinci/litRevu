@@ -120,6 +120,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;
   gap: 20px;
 }
 form input,
@@ -130,6 +131,11 @@ form textarea {
   color: #d1d3c9;
   text-align: center;
 }
+form #id_rating {
+  display: flex;
+  gap: 20px;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -222,14 +228,13 @@ form textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
   width: 50%;
+  gap: 50px;
 }
 .content__loginSection__signin {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
   width: 50%;
 }
 

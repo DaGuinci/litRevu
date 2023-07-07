@@ -8,15 +8,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 50%;
         gap: 50px;
-        width: 50%
     }
 
     &__signin{
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 50px;
         width: 50%
     }
 }

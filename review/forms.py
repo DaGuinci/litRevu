@@ -11,7 +11,7 @@ class LoginForm(forms.Form):
         )
     password = forms.CharField(
         label='',
-        widget=forms.PasswordInput(attrs={'placeholder':'Mot de passe'})
+        widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe'})
         )
 
 
@@ -22,10 +22,23 @@ class SignupForm(UserCreationForm):
             'username': None,
         }
 
+        labels = {
+            'username': ''
+        }
+
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Nom d\'utilisateur'})
+        }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['password1'].help_text = None
+        self.fields['password1'].label = ''
+        self.fields['password1'].widget.attrs['placeholder'] = 'Mot de passe'
         self.fields['password2'].help_text = None
+        self.fields['password2'].label = ''
+        placeholder2 = 'Confirmer le mot de passe'
+        self.fields['password2'].widget.attrs['placeholder'] = placeholder2
 
 class CreateReviewForm(forms.ModelForm):
     class Meta:
@@ -42,7 +55,15 @@ class CreateReviewForm(forms.ModelForm):
             'ticket'
             ]
         widgets = {
-            "rating": forms.RadioSelect(choices=CHOICES)
+            'rating': forms.RadioSelect(choices=CHOICES),
+            'headline': forms.TextInput(attrs={'placeholder': 'Titre'}),
+            'body': forms.TextInput(attrs={'placeholder': 'Commentaire'})
+        }
+
+        labels = {
+            'rating': 'Évaluation',
+            'headline': '',
+            'body': ''
         }
 
 
@@ -53,3 +74,13 @@ class CreateTicketForm(forms.ModelForm):
             'user',
             'time_created',
             ]
+
+        labels = {
+            'title': '',
+            'description': ''
+        }
+
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Titre'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description'})
+        }

@@ -101,6 +101,20 @@ h3 {
 .reviewBlock__body .btn, .reviewBlock__body form button, form .reviewBlock__body button {
   align-self: flex-end;
 }
+.reviewBlock__body__ticket {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border: 1px solid #d1d3c9;
+}
+.reviewBlock__body__ticket .thumbnail {
+  margin: 0 0 0 30px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-width: 150px;
+  height: 300px;
+}
 
 form {
   display: flex;

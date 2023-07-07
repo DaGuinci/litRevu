@@ -59,5 +59,21 @@
         .btn{
             align-self: flex-end;
         }
+
+        &__ticket{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 15px;
+            border: 1px solid $textCol;
+
+            .thumbnail{
+                margin: 0 0 0 30px;
+                background-repeat: no-repeat;
+                background-size: contain;
+                min-width: 150px;
+                height: 300px;
+            }
+        }
     }
 }

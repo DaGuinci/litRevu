@@ -23,4 +23,16 @@
     <div class="reviewBlock__body">
         <p>{{ review.body }}</p>
     </div>
+    {% if review.ticket %}
+    <div class="reviewBlock__body__ticket">
+        <p>Ticket - {{ review.ticket.user }} </p>
+        <h4>{{ review.ticket.title }} </h4>
+        {% if review.ticket.image %}
+        <div class="thumbnail"
+        style="background-image: url('{{ review.ticket.image.url }}')"
+        >
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
 </div>

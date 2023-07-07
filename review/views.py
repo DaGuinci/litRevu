@@ -86,6 +86,7 @@ def add_review(request):
 
 def add_review_to(request, ticket_id):
     form = forms.CreateReviewForm()
+    ticket = Ticket.objects.get(id=ticket_id)
     if request.method == 'POST':
         form = forms.CreateReviewForm(request.POST)
         if form.is_valid():
@@ -95,7 +96,10 @@ def add_review_to(request, ticket_id):
             review.ticket_id = ticket_id
             review.save()
             return redirect('home')
-    return render(request, 'review/add_review.html', context={'form': form})
+    return render(request, 'review/add_review.html', context={
+        'review_form': form,
+        'ticket': ticket
+        })
 
 @login_required
 def add_ticket(request):

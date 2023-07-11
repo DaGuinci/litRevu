@@ -7,6 +7,10 @@
         {% if user.is_authenticated %}
         <div class="header">
             <div class="header__container">
+                <div class="animation"
+                style="background-image: url('{% static 'images/text.png'%}');
+                mask-image: url('{% static 'images/halo.png' %}')"
+                ></div>
                 <div class="header__container__right"></div>
                 <a href="{% url 'home' %}">
                     <h1 class="header__container__title">

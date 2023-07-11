@@ -15,7 +15,8 @@
 
     a{
         display: flex;
-        align-items: center;                        height: 100%;
+        align-items: center;
+        height: 100%;
         color: $textCol;
         text-decoration: none;
     }
@@ -25,12 +26,36 @@
         align-items: center;
         height: 100%;
 
+        .animation{
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position-y: center;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            animation: travelling 10s;
+            mask-position: -30%;
+            z-index: 1;
+
+            @keyframes travelling {
+                0% {
+                    mask-position: -30%;
+                }
+                100% {
+                    mask-position: 130%;
+                }
+            }
+        }
+
         div,
         ul{
             width: 45%;
         }
 
         h1{
+            z-index: 100;
             text-align: center;
         }
 
@@ -42,6 +67,7 @@
             list-style: none;
 
             li{
+                z-index: 100;
                 display: flex;
                 align-items: center;
                 height: 100%;

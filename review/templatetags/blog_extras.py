@@ -11,10 +11,7 @@ def model_type(value):
 
 @register.filter
 def has_response(ticket):
-    print(ticket)
-    #     # reviews =
     response = Review.objects.filter(ticket_id=ticket.id).all()
     if response:
         return True
-    # print('reponse :', response)
     return False

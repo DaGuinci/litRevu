@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_browser_reload',
     'review',
-    # 'authentication'
+    'customUser'
 ]
 
 MIDDLEWARE = [
@@ -132,6 +132,9 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR.joinpath('media/')
+
+AUTH_USER_MODEL = "customUser.CustomUser"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

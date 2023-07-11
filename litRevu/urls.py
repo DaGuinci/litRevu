@@ -23,6 +23,7 @@ from django.contrib.auth.views import (
     )
 from django.urls import include, path
 from review import views
+from customUser import views as userViews
 # from authentication import views as auth_views
 
 urlpatterns = [
@@ -43,6 +44,7 @@ urlpatterns = [
         name='add_review_to'
         ),
     path("__reload__/", include("django_browser_reload.urls")),
+    path('subscribes/', userViews.follow_users, name='subscribes'),
 ]
 if settings.DEBUG:
     urlpatterns += static(

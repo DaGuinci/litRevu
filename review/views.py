@@ -189,3 +189,23 @@ def subscribes(request):
         'followed': followed,
         'followers': followers
         })
+
+@login_required
+def unfollow(request, username):
+
+    try:
+        unfollowed = User.objects.get(
+            username=username
+        )
+
+        following = UserFollows.objects.get(
+            followed_user=unfollowed,
+            user=request.user
+        )
+
+        following.delete()
+
+    except UserFollows.DoesNotExist:
+        pass
+
+    return subscribes(request)

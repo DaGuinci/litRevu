@@ -19,6 +19,9 @@
             <p>
                 {{ user }}
             </p>
+            <p>
+                <a href="{% url 'unfollow' user %}">Se désabonner</a>
+            </p>
         </li>
         {% endfor %}
     </ul>
@@ -30,9 +33,6 @@
         <li>
             <p>
                 {{ user }}
-            </p>
-            <p>
-                {% comment %} <a href="{% url 'unfollow' user %}">Se désabonner</a> {% endcomment %}
             </p>
         </li>
         {% endfor %}

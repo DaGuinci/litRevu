@@ -1,13 +1,16 @@
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db import IntegrityError
 
 from itertools import chain
 
 from review import forms
 from review.models import Review, Ticket, UserFollows
+
 
 def signup_page(request):
     form = forms.SignupForm()
@@ -33,7 +36,7 @@ def log_user_in(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.error(request,'Nom d\'utilisateur ou mot de passe incorrect')
+                messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect')
                 return redirect('login')
     return render(request, 'review/login.html', context={'form': form})
 
@@ -116,15 +119,73 @@ def add_ticket(request):
 @login_required
 def subscribes(request):
     form = forms.UserFollowForm()
-    followed = UserFollows.objects.filter(
 
-    )
+    # Obtenir la liste des abonnés
+    followers = []
+
+    try:
+        followerings = UserFollows.objects.filter(
+            followed_user=request.user
+        )
+    except UserFollows.DoesNotExist:
+        followerings = None
+
+    for follower in followerings:
+        followers.append(follower.user)
+
+    # Obtenir la liste des abonnements
+    followed = []
+
+    try:
+        followings = UserFollows.objects.filter(
+            user=request.user
+        )
+    except UserFollows.DoesNotExist:
+        followings = None
+
+    for userFollows in followings:
+        followed.append(userFollows.followed_user)
+
     if request.method == 'POST':
         form = forms.UserFollowForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            # ticket = form.save(commit=False)
-            # ticket.user = request.user
-            # ticket.save()
+            # Vérifier que l'utilisateur ne se suit pas lui-meme
+            if form.cleaned_data['to_follow'] != request.user.username:
+                # Vérifier que l'utilisateur existe
+                try:
+                    to_follow = User.objects.get(
+                        username=form.cleaned_data['to_follow']
+                    )
+                except User.DoesNotExist:
+                    messages.error(
+                        request,
+                        'Nous ne connaissons pas cet utilisateur, \
+                            veuillez essayer un autre nom.'
+                            )
+                    return redirect('subscribes')
+
+
+                userFollows = UserFollows(
+                    user=request.user,
+                    followed_user=to_follow
+                    )
+
+                # Vérifier que l'utilisateur n;est pas déjà suivi
+                try:
+                    userFollows.save()
+                except IntegrityError:
+                    messages.error(
+                        request,
+                        'Vous suivez déjà cet utilisateur, \
+                            veuillez essayer un autre nom.'
+                            )
+            else:
+                messages.error(
+                    request,
+                    'Vous ne pouvez vous abonner à vous-même !')
             return redirect('subscribes')
-    return render(request, 'review/subscribes.html', context={'form': form})
+    return render(request, 'review/subscribes.html', context={
+        'form': form,
+        'followed': followed,
+        'followers': followers
+        })

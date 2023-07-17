@@ -1,6 +1,9 @@
 {% extends 'review/base.html' %}
 {% block content %}
     <h2>Suivre des utilisateurs</h2>
+    <h1>Coucou Jules</h1>
+    <p>Abonnés :</p>
+    <p> {{ followed }} </p>
     <form method="post">
         {{ form.as_p }}
         {% csrf_token %}

@@ -10,4 +10,6 @@ def follow_users(request):
         if form.is_valid():
             form.save()
             return redirect('home')
-    return render(request, 'customUser/follow_users_form.html', context={'form': form})
+    # followed = request.user.follows.all()
+    return render(request, 'customUser/follow_users_form.html', context={
+        'form': form})

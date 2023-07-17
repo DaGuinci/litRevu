@@ -146,66 +146,70 @@ def subscribes(request):
     for userFollows in followings:
         followed.append(userFollows.followed_user)
 
+
     if request.method == 'POST':
         form = forms.UserFollowForm(request.POST)
         if form.is_valid():
-            # Vérifier que l'utilisateur ne se suit pas lui-meme
-            if form.cleaned_data['to_follow'] != request.user.username:
-                # Vérifier que l'utilisateur existe
-                try:
-                    to_follow = User.objects.get(
-                        username=form.cleaned_data['to_follow']
-                    )
-                except User.DoesNotExist:
+            print(request.POST)
+            # Verifier si la demande est une subscription ou un désabonnement
+            if 'to_follow' in request.POST:
+                # Vérifier que l'utilisateur ne se suit pas lui-meme
+                if form.cleaned_data['to_follow'] != request.user.username:
+                    # Vérifier que l'utilisateur existe
+                    try:
+                        to_follow = User.objects.get(
+                            username=form.cleaned_data['to_follow']
+                        )
+                    except User.DoesNotExist:
+                        messages.error(
+                            request,
+                            'Nous ne connaissons pas cet utilisateur, \
+                                veuillez essayer un autre nom.'
+                                )
+                        return redirect('subscribes')
+
+                    userFollows = UserFollows(
+                        user=request.user,
+                        followed_user=to_follow
+                        )
+
+                    # Vérifier que l'utilisateur n;est pas déjà suivi
+                    try:
+                        userFollows.save()
+                    except IntegrityError:
+                        messages.error(
+                            request,
+                            'Vous suivez déjà cet utilisateur, \
+                                veuillez essayer un autre nom.'
+                                )
+                else:
                     messages.error(
                         request,
-                        'Nous ne connaissons pas cet utilisateur, \
-                            veuillez essayer un autre nom.'
-                            )
+                        'Vous ne pouvez vous abonner à vous-même !')
+                return redirect('subscribes')
+
+            # cas de desabonnement
+            else:
+                try:
+                    unfollowedName = request.POST['username']
+                    unfollowed = User.objects.get(
+                        username=unfollowedName
+                    )
+
+                    following = UserFollows.objects.get(
+                        followed_user=unfollowed,
+                        user=request.user
+                    )
+
+                    following.delete()
                     return redirect('subscribes')
 
+                except UserFollows.DoesNotExist:
+                    pass
 
-                userFollows = UserFollows(
-                    user=request.user,
-                    followed_user=to_follow
-                    )
-
-                # Vérifier que l'utilisateur n;est pas déjà suivi
-                try:
-                    userFollows.save()
-                except IntegrityError:
-                    messages.error(
-                        request,
-                        'Vous suivez déjà cet utilisateur, \
-                            veuillez essayer un autre nom.'
-                            )
-            else:
-                messages.error(
-                    request,
-                    'Vous ne pouvez vous abonner à vous-même !')
-            return redirect('subscribes')
     return render(request, 'review/subscribes.html', context={
         'form': form,
         'followed': followed,
         'followers': followers
         })
 
-@login_required
-def unfollow(request, username):
-
-    try:
-        unfollowed = User.objects.get(
-            username=username
-        )
-
-        following = UserFollows.objects.get(
-            followed_user=unfollowed,
-            user=request.user
-        )
-
-        following.delete()
-
-    except UserFollows.DoesNotExist:
-        pass
-
-    return subscribes(request)

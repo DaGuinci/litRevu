@@ -6,7 +6,7 @@
             {{ message }}
         </div>
     {% endfor %}
-    <form method="post" enctype='multipart/form-data'>
+    <form method="post" enctype='multipart/form-data' novalidate>
         {{ form.as_p }}
         {% csrf_token %}
         <button type="submit" >Envoyer</button>
@@ -19,9 +19,13 @@
             <p>
                 {{ user }}
             </p>
-            <p>
-                <a href="{% url 'unfollow' user %}">Se désabonner</a>
-            </p>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{ user.username }}">
+                <button type="submit">
+                    Se désabonner
+                </button>
+            </form>
         </li>
         {% endfor %}
     </ul>

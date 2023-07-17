@@ -43,7 +43,6 @@ urlpatterns = [
         name='add_review_to'
         ),
     path('subscribes/', views.subscribes, name='subscribes'),
-    path('unfollow/<str:username>', views.unfollow, name='unfollow'),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
 if settings.DEBUG:

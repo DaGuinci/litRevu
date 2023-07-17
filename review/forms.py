@@ -91,7 +91,9 @@ class UserFollowForm(forms.Form):
 
     to_follow = forms.CharField(
         max_length=180,
+        required=False,
         label='',
         widget=forms.TextInput(
             attrs={'placeholder': 'Nom d\'utilisateur'}
-        ))
+        )
+        )

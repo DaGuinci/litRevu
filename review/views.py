@@ -1,13 +1,13 @@
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 from itertools import chain
 
 from review import forms
-from review.models import Review, Ticket
+from review.models import Review, Ticket, UserFollows
 
 def signup_page(request):
     form = forms.SignupForm()
@@ -112,3 +112,19 @@ def add_ticket(request):
             ticket.save()
             return redirect('home')
     return render(request, 'review/add_ticket.html', context={'form': form})
+
+@login_required
+def subscribes(request):
+    form = forms.UserFollowForm()
+    followed = UserFollows.objects.filter(
+
+    )
+    if request.method == 'POST':
+        form = forms.UserFollowForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            # ticket = form.save(commit=False)
+            # ticket.user = request.user
+            # ticket.save()
+            return redirect('subscribes')
+    return render(request, 'review/subscribes.html', context={'form': form})

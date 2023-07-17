@@ -40,6 +40,7 @@ class SignupForm(UserCreationForm):
         placeholder2 = 'Confirmer le mot de passe'
         self.fields['password2'].widget.attrs['placeholder'] = placeholder2
 
+
 class CreateReviewForm(forms.ModelForm):
     class Meta:
         CHOICES = [
@@ -84,3 +85,13 @@ class CreateTicketForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'placeholder': 'Titre'}),
             'description': forms.Textarea(attrs={'placeholder': 'Description'})
         }
+
+
+class UserFollowForm(forms.Form):
+
+    to_follow = forms.CharField(
+        max_length=180,
+        label='',
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Nom d\'utilisateur'}
+        ))

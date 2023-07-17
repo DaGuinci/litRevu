@@ -42,6 +42,7 @@ urlpatterns = [
         views.add_review_to,
         name='add_review_to'
         ),
+    path('subscribes/', views.subscribes, name='subscribes'),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
 if settings.DEBUG:

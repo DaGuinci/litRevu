@@ -5,37 +5,10 @@
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
     <body>
         {% if user.is_authenticated %}
-        <div class="header">
-            <div class="header__container">
-                <div class="animation"
-                style="background-image: url('{% static 'images/text.png'%}');
-                mask-image: url('{% static 'images/halo.png' %}')"
-                ></div>
-                <div class="header__container__right"></div>
-                <a href="{% url 'home' %}">
-                    <h1 class="header__container__title">
-                        LITReview
-                    </h1>
-                </a>
-                <ul class="header__container__menu">
-                    <li>
-                        <a href="{% url 'home' %}">Flux</a>
-                    </li>
-                    <li>Posts</li>
-                    <li>
-                        <a href="{% url 'subscribes' %}">Abonnements</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'logout' %}">Se déconnecter</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+            {% include 'review/partials/header.html' %}
         {% endif %}
         <div class="content">
             {% block content %}{% endblock %}
-            {% if user.is_authenticated %}
-            {% endif %}
         </div>
     </body>
 </html>

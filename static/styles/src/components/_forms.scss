@@ -30,3 +30,11 @@ form{
         width: 100%;
     }
 }
+
+.follow_form{
+    flex-direction: row;
+
+    button{
+        padding: 15px 20px;
+    }
+}

@@ -1,6 +1,4 @@
-.header{
-    background-color: $black;
-    height: 100px;
+.animated_header{
     animation: entrance 1s;
     @keyframes entrance {
         0% {
@@ -12,6 +10,11 @@
             opacity: 1;
         }
     }
+}
+
+.header{
+    background-color: $black;
+    height: 100px;
 
     a{
         display: flex;
@@ -64,7 +67,6 @@
             height: 100%;
             justify-content: flex-end;
             align-items: center;
-            list-style: none;
 
             li{
                 z-index: 100;

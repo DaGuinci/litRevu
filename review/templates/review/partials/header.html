@@ -1,0 +1,30 @@
+{% load static %}
+
+<div class="header {% if animation %}animated_header{% endif %} ">
+    <div class="header__container">
+        {% if animation %}
+            <div class="animation"
+            style="background-image: url('{% static 'images/text.png'%}');
+            mask-image: url('{% static 'images/halo.png' %}')"
+            ></div>
+        {% endif %}
+        <div class="header__container__right"></div>
+        <a href="{% url 'home' %}">
+            <h1 class="header__container__title">
+                LITReview
+            </h1>
+        </a>
+        <ul class="header__container__menu">
+            <li>
+                <a href="{% url 'home' %}">Flux</a>
+            </li>
+            <li>Posts</li>
+            <li>
+                <a href="{% url 'subscribes' %}">Abonnements</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Se déconnecter</a>
+            </li>
+        </ul>
+    </div>
+</div>

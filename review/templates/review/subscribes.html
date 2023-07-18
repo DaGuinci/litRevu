@@ -6,40 +6,52 @@
             {{ message }}
         </div>
     {% endfor %}
-    <form method="post" enctype='multipart/form-data' novalidate>
+    <form
+        method="post"
+        enctype='multipart/form-data'
+        novalidate
+        class="follow_form"
+    >
         {{ form.as_p }}
         {% csrf_token %}
         <button type="submit" >Envoyer</button>
     </form>
     {% if followed|length > 0 %}
-    <h2>Abonnements</h2>
-    <ul>
-        {% for user in followed %}
-        <li>
-            <p>
-                {{ user }}
-            </p>
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="username" value="{{ user.username }}">
-                <button type="submit">
-                    Se désabonner
-                </button>
-            </form>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="subscribes_section">
+        <h2>Abonnements</h2>
+        <ul>
+            {% for user in followed %}
+            <li>
+                <form
+                method="post"
+                class="follow_form"
+                >
+                    <p>
+                        {{ user }}
+                    </p>
+                    {% csrf_token %}
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    <button type="submit">
+                        Se désabonner
+                    </button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
     {% endif %}
     {% if followers|length > 0 %}
-    <h2>Abonnés</h2>
-    <ul>
-        {% for user in followers %}
-        <li>
-            <p>
-                {{ user }}
-            </p>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="subscribes_section">
+        <h2>Abonnés</h2>
+        <ul>
+            {% for user in followers %}
+            <li>
+                <p>
+                    {{ user }}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
     {% endif %}
 {% endblock content %}

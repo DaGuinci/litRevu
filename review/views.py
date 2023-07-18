@@ -62,7 +62,8 @@ def home(request):
         )
     return render(request,
                   'review/home.html',
-                  {'posts': posts}
+                  {'posts': posts,
+                   'animation': True}
                   )
 
 # TODO ajouter argument id ticket pour si liaison ticket

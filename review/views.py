@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -10,6 +10,8 @@ from itertools import chain
 
 from review import forms
 from review.models import Review, Ticket, UserFollows
+
+from review import tools
 
 
 def signup_page(request):
@@ -43,17 +45,15 @@ def log_user_in(request):
 
 @login_required
 def home(request):
-    # reviews = models.Review.objects.filter(
-    #     uploader__in=request.user.follows.all()
-    #     ).exclude(blog__in=blogs)
-    reviews = Review.objects.all()
+
+    reviews = tools.get_user_viewable_reviews(request.user)
 
     # préparer des iterateurs pour les etoiles dans le html
     for review in reviews:
         review.rate_iterator = range(review.rating)
         review.unrate_iterator = range(5 - review.rating)
 
-    tickets = Ticket.objects.all()
+    tickets = tools.get_user_viewable_tickets(request.user)
 
     posts = sorted(
         chain(reviews, tickets),
@@ -66,7 +66,6 @@ def home(request):
                    'animation': True}
                   )
 
-# TODO ajouter argument id ticket pour si liaison ticket
 @login_required
 def add_review(request):
     review_form = forms.CreateReviewForm()
@@ -87,6 +86,7 @@ def add_review(request):
         'review_form': review_form,
         'ticket_form': ticket_form
         })
+
 
 def add_review_to(request, ticket_id):
     form = forms.CreateReviewForm()
@@ -135,23 +135,12 @@ def subscribes(request):
         followers.append(follower.user)
 
     # Obtenir la liste des abonnements
-    followed = []
-
-    try:
-        followings = UserFollows.objects.filter(
-            user=request.user
-        )
-    except UserFollows.DoesNotExist:
-        followings = None
-
-    for userFollows in followings:
-        followed.append(userFollows.followed_user)
-
+    followed = tools.get_followeds(request.user)
 
     if request.method == 'POST':
         form = forms.UserFollowForm(request.POST)
         if form.is_valid():
-            print(request.POST)
+
             # Verifier si la demande est une subscription ou un désabonnement
             if 'to_follow' in request.POST:
                 # Vérifier que l'utilisateur ne se suit pas lui-meme

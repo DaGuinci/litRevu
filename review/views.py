@@ -9,8 +9,7 @@ from django.db import IntegrityError
 from itertools import chain
 
 from review import forms
-from review.models import Review, Ticket, UserFollows
-
+from review import models
 from review import tools
 
 
@@ -90,7 +89,7 @@ def add_review(request):
 
 def add_review_to(request, ticket_id):
     form = forms.CreateReviewForm()
-    ticket = Ticket.objects.get(id=ticket_id)
+    ticket = models.Ticket.objects.get(id=ticket_id)
     if request.method == 'POST':
         form = forms.CreateReviewForm(request.POST)
         if form.is_valid():
@@ -117,6 +116,27 @@ def add_ticket(request):
             return redirect('home')
     return render(request, 'review/add_ticket.html', context={'form': form})
 
+
+@login_required
+def edit_review(request, id):
+    review = models.Review.objects.get(
+        id=id
+    )
+
+    if request.method == 'POST':
+        form = forms.CreateReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = forms.CreateReviewForm(instance=review)
+
+    return render(request,
+                  'review/edit_review.html',
+                  {'form': form}
+                  )
+
+
 @login_required
 def subscribes(request):
     form = forms.UserFollowForm()
@@ -125,10 +145,10 @@ def subscribes(request):
     followers = []
 
     try:
-        followerings = UserFollows.objects.filter(
+        followerings = models.UserFollows.objects.filter(
             followed_user=request.user
         )
-    except UserFollows.DoesNotExist:
+    except models.UserFollows.DoesNotExist:
         followerings = None
 
     for follower in followerings:
@@ -158,7 +178,7 @@ def subscribes(request):
                                 )
                         return redirect('subscribes')
 
-                    userFollows = UserFollows(
+                    userFollows = models.UserFollows(
                         user=request.user,
                         followed_user=to_follow
                         )
@@ -186,7 +206,7 @@ def subscribes(request):
                         username=unfollowedName
                     )
 
-                    following = UserFollows.objects.get(
+                    following = models.UserFollows.objects.get(
                         followed_user=unfollowed,
                         user=request.user
                     )
@@ -194,7 +214,7 @@ def subscribes(request):
                     following.delete()
                     return redirect('subscribes')
 
-                except UserFollows.DoesNotExist:
+                except models.UserFollows.DoesNotExist:
                     pass
 
     return render(request, 'review/subscribes.html', context={

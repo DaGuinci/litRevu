@@ -36,6 +36,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', views.signup_page, name='signup'),
     path('add-review/', views.add_review, name='add_review'),
+    path('edit-review/<int:id>', views.edit_review, name='edit_review'),
     path('add-ticket/', views.add_ticket, name='add_ticket'),
     path(
         'add-review-to/<int:ticket_id>',

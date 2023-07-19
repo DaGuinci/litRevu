@@ -35,5 +35,12 @@
         {% endif %}
     </div>
     {% endif %}
-    <a class="btn" href="{% url 'edit_review' review.id %}">Modifier la critique</a>
+    {% if user == review.user %}
+        <div
+        class="delete"
+        style="mask-image: url('{% static 'images/edit.svg'%}')"
+        >
+            <a href="{% url 'edit_review' review.id %}"></a>
+        </div>
+    {% endif %}
 </div>

@@ -27,6 +27,12 @@ def get_user_viewable_reviews(user):
         )
         for review in list(reviews):
             all_reviews.append(review)
+    written = models.Review.objects.filter(
+        user=user
+    )
+
+    for review in written:
+        all_reviews.append(review)
 
     return all_reviews
 

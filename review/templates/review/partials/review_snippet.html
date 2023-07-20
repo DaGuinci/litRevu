@@ -29,10 +29,15 @@
         <p>Ticket - {{ review.ticket.user }} </p>
         <h4>{{ review.ticket.title }} </h4>
         {% if review.ticket.image %}
-        <div class="thumbnail"
+            <img
+            class="thumbnail"
+            src="{{ review.ticket.image.url }}"
+            alt="Illustration {{ review.ticket.title }}"
+            >
+        {% comment %} <div class="thumbnail"
         style="background-image: url('{{ review.ticket.image.url }}')"
         >
-        </div>
+        </div> {% endcomment %}
         {% endif %}
     </div>
     {% endif %}

@@ -171,8 +171,8 @@ form .subtitle {
 }
 .reviewBlock__body__ticket .thumbnail {
   margin: 0 0 0 30px;
-  background-repeat: no-repeat;
-  background-size: contain;
+  object-fit: contain;
+  object-position: left;
   min-width: 150px;
   height: 300px;
 }

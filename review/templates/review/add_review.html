@@ -12,6 +12,8 @@
 </form>
 {% else %}
 <h2>Vous êtes en train de poster une réponse à :</h2>
+{% comment %} si ticket en cours de rédaction
+ne pas afficher le bouton de réponse {% endcomment %}
 {% include 'review/partials/ticket_snippet.html' with ticket=ticket display=False %}
 <form method="post">
     <h4 class="subtitle">Critique</h4>

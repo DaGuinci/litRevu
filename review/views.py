@@ -44,7 +44,6 @@ def log_user_in(request):
 
 @login_required
 def home(request):
-
     reviews = tools.get_user_viewable_reviews(request.user)
 
     # préparer des iterateurs pour les etoiles dans le html
@@ -53,7 +52,6 @@ def home(request):
         review.unrate_iterator = range(5 - review.rating)
 
     tickets = tools.get_user_viewable_tickets(request.user)
-    print(tickets)
 
     posts = sorted(
         chain(reviews, tickets),
@@ -105,18 +103,6 @@ def add_review_to(request, ticket_id):
         'ticket': ticket
         })
 
-@login_required
-def add_ticket(request):
-    form = forms.CreateTicketForm()
-    if request.method == 'POST':
-        form = forms.CreateTicketForm(request.POST, request.FILES)
-        if form.is_valid():
-            ticket = form.save(commit=False)
-            ticket.user = request.user
-            ticket.save()
-            return redirect('home')
-    return render(request, 'review/add_ticket.html', context={'form': form})
-
 
 @login_required
 def edit_review(request, id):
@@ -144,6 +130,41 @@ def edit_review(request, id):
 
 
 @login_required
+def delete_review(request, id):
+    review = models.Review.objects.get(
+        id=id
+    )
+
+    if review.user == request.user:
+        if request.method == 'POST':
+            review.delete()
+            return render(request,
+                          'review/delete_success.html',
+                          {'post': review}
+                          )
+        else:
+            return render(request,
+                          'review/delete_confirm.html',
+                          {'review': review}
+                          )
+
+    else:
+        return home(request)
+
+@login_required
+def add_ticket(request):
+    form = forms.CreateTicketForm()
+    if request.method == 'POST':
+        form = forms.CreateTicketForm(request.POST, request.FILES)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            return redirect('home')
+    return render(request, 'review/add_ticket.html', context={'form': form})
+
+
+@login_required
 def edit_ticket(request, id):
     ticket = models.Ticket.objects.get(
         id=id
@@ -152,12 +173,12 @@ def edit_ticket(request, id):
     if ticket.user == request.user:
 
         if request.method == 'POST':
-            form = forms.CreateReviewForm(request.POST, instance=ticket)
+            form = forms.CreateTicketForm(request.POST, instance=ticket)
             if form.is_valid():
                 form.save()
                 return redirect('home')
         else:
-            form = forms.CreateReviewForm(instance=ticket)
+            form = forms.CreateTicketForm(instance=ticket)
 
         return render(request,
                     'review/edit_post.html',

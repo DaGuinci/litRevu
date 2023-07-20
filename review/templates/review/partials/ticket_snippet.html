@@ -19,7 +19,7 @@
         >
         </div>
         {% endif %}
-        {% if display and not ticket|has_response %}
+        {% if ticket.user != user and not ticket|has_response %}
         <a class="btn" href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
         {% endif %}
         {% if user == ticket.user %}
@@ -28,7 +28,7 @@
             class="delete"
             style="mask-image: url('{% static 'images/edit.svg'%}')"
                 >
-                    <a href="{% url 'edit_post' ticket.id %}"></a>
+                    <a href="{% url 'edit_ticket' ticket.id %}"></a>
                 </div>
             </div>
         {% endif %}

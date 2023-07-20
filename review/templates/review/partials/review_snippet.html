@@ -41,8 +41,15 @@
         class="delete"
         style="mask-image: url('{% static 'images/edit.svg'%}')"
         >
-            <a href="{% url 'edit_post' review.id %}"></a>
+            <a href="{% url 'edit_review' review.id %}"></a>
         </div>
+        <div
+        class="delete"
+        style="mask-image: url('{% static 'images/delete.svg'%}')"
+        >
+            <a href="{% url 'delete_review' review.id %}"></a>
+        </div>
+
     </div>
     {% endif %}
 </div>

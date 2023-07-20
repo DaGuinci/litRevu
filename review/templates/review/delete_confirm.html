@@ -1,0 +1,12 @@
+{% extends 'review/base.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <p>Souhaitez-vous vraiment supprimer la critique de "{{review.ticket.title}}" ?</p>
+    <button type="submit">Confirmer</button>
+    <a href="{% url 'home' %}">Annuler</a>
+</form>
+
+{% endblock content %}

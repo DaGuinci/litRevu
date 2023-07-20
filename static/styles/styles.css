@@ -59,6 +59,46 @@ ul {
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0;
+  gap: 20px;
+}
+form input,
+form textarea {
+  border: 1px solid #670280;
+  padding: 15px;
+  background-color: #0b2431;
+  color: #d1d3c9;
+  text-align: center;
+}
+form #id_rating {
+  display: flex;
+  gap: 20px;
+}
+form .subtitle {
+  border-bottom: 1px solid #d1d3c9;
+  width: 100%;
+}
+
+.follow_form {
+  flex-direction: row;
+}
+.follow_form button {
+  padding: 15px 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1000px;
+  margin: auto;
+  padding-top: 75px;
+}
+
 .reviewBlock {
   display: flex;
   flex-direction: column;
@@ -142,46 +182,6 @@ ul {
   display: inline-block;
   width: 100%;
   height: 100%;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 50px 0;
-  gap: 20px;
-}
-form input,
-form textarea {
-  border: 1px solid #670280;
-  padding: 15px;
-  background-color: #0b2431;
-  color: #d1d3c9;
-  text-align: center;
-}
-form #id_rating {
-  display: flex;
-  gap: 20px;
-}
-form .subtitle {
-  border-bottom: 1px solid #d1d3c9;
-  width: 100%;
-}
-
-.follow_form {
-  flex-direction: row;
-}
-.follow_form button {
-  padding: 15px 20px;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 1000px;
-  margin: auto;
-  padding-top: 75px;
 }
 
 .animated_header {
@@ -322,6 +322,13 @@ form .subtitle {
 .subscribes_section ul li form {
   display: flex;
   justify-content: space-between;
+}
+
+.delete_confirm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -15,3 +15,9 @@ def has_response(ticket):
     if response:
         return True
     return False
+
+@register.simple_tag(takes_context=True)
+def get_author_display(context, user):
+    if context['user'] == user:
+        return 'vous'
+    return user.username

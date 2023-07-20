@@ -3,7 +3,7 @@
 
 <div class="reviewBlock">
     <div class="reviewBlock__infos">
-        <p>{{ ticket.user }} a demandé une critique</p>
+        <p>Critique demandée par {% get_author_display ticket.user %}</p>
         <p>{{ ticket.time_created }}</p>
     </div>
     <div class="reviewBlock__headline">

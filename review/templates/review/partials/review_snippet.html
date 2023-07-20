@@ -1,8 +1,9 @@
 {% load static %}
+{% load blog_extras %}
 
 <div class="reviewBlock">
     <div class="reviewBlock__infos">
-        <p>{{ review.user }} a publié une critique</p>
+        <p>Critique publiée par {% get_author_display review.user %}</p>
         <p> {{ review.time_created }} </p>
     </div>
     <div class="reviewBlock__headline">

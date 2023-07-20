@@ -1,3 +1,4 @@
+{% load static %}
 {% load blog_extras %}
 
 <div class="reviewBlock">
@@ -20,6 +21,16 @@
         {% endif %}
         {% if display and not ticket|has_response %}
         <a class="btn" href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
+        {% endif %}
+        {% if user == ticket.user %}
+        <div class="edit_buttons">
+            <div
+            class="delete"
+            style="mask-image: url('{% static 'images/edit.svg'%}')"
+                >
+                    <a href="{% url 'edit_post' ticket.id %}"></a>
+                </div>
+            </div>
         {% endif %}
     </div>
 </div>

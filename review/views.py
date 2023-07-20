@@ -53,6 +53,7 @@ def home(request):
         review.unrate_iterator = range(5 - review.rating)
 
     tickets = tools.get_user_viewable_tickets(request.user)
+    print(tickets)
 
     posts = sorted(
         chain(reviews, tickets),
@@ -134,7 +135,7 @@ def edit_review(request, id):
             form = forms.CreateReviewForm(instance=review)
 
         return render(request,
-                    'review/edit_review.html',
+                    'review/edit_post.html',
                     {'form': form}
                     )
 
@@ -142,6 +143,29 @@ def edit_review(request, id):
         return home(request)
 
 
+@login_required
+def edit_ticket(request, id):
+    ticket = models.Ticket.objects.get(
+        id=id
+    )
+
+    if ticket.user == request.user:
+
+        if request.method == 'POST':
+            form = forms.CreateReviewForm(request.POST, instance=ticket)
+            if form.is_valid():
+                form.save()
+                return redirect('home')
+        else:
+            form = forms.CreateReviewForm(instance=ticket)
+
+        return render(request,
+                    'review/edit_post.html',
+                    {'form': form}
+                    )
+
+    else:
+        return home(request)
 
 @login_required
 def subscribes(request):

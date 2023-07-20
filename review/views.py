@@ -123,18 +123,24 @@ def edit_review(request, id):
         id=id
     )
 
-    if request.method == 'POST':
-        form = forms.CreateReviewForm(request.POST, instance=review)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = forms.CreateReviewForm(instance=review)
+    if review.user == request.user:
 
-    return render(request,
-                  'review/edit_review.html',
-                  {'form': form}
-                  )
+        if request.method == 'POST':
+            form = forms.CreateReviewForm(request.POST, instance=review)
+            if form.is_valid():
+                form.save()
+                return redirect('home')
+        else:
+            form = forms.CreateReviewForm(instance=review)
+
+        return render(request,
+                    'review/edit_review.html',
+                    {'form': form}
+                    )
+
+    else:
+        return home(request)
+
 
 
 @login_required

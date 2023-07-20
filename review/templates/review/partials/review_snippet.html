@@ -36,11 +36,13 @@
     </div>
     {% endif %}
     {% if user == review.user %}
+    <div class="edit_buttons">
         <div
         class="delete"
         style="mask-image: url('{% static 'images/edit.svg'%}')"
         >
             <a href="{% url 'edit_review' review.id %}"></a>
         </div>
+    </div>
     {% endif %}
 </div>

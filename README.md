@@ -1,4 +1,4 @@
-    # DaGuinci - Python support
+\# DaGuinci \- Python support
 
 ## Installation
 
@@ -39,3 +39,14 @@ python xxx.py
 ``` bash
 sass static/styles/styles.scss static/styles/styles.css --watch
 ```
+
+This is the markdown todo file for project a.
+
+## Content
+
+Tasks related to new content.
+
+* [ ] Supprimer l'animation de la page posts
+* [ ] Ajouter des animations css
+* [ ] Repasser l'historique du projet
+* [ ] Repasser les critères d'évaluation

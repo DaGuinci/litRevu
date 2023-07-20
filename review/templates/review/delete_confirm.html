@@ -4,6 +4,7 @@
 
 <form method="POST">
     {% csrf_token %}
+    {{review}}
     <p>Souhaitez-vous vraiment supprimer la critique de "{{review.ticket.title}}" ?</p>
     <button type="submit">Confirmer</button>
     <a href="{% url 'home' %}">Annuler</a>

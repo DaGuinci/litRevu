@@ -188,6 +188,29 @@ def edit_ticket(request, id):
     else:
         return home(request)
 
+
+@login_required
+def delete_ticket(request, id):
+    ticket = models.Ticket.objects.get(
+        id=id
+    )
+
+    if ticket.user == request.user:
+        if request.method == 'POST':
+            ticket.delete()
+            return render(request,
+                          'review/delete_success.html',
+                          {'post': ticket}
+                          )
+        else:
+            return render(request,
+                          'review/delete_confirm.html',
+                          {'ticket': ticket}
+                          )
+
+    else:
+        return home(request)
+
 @login_required
 def subscribes(request):
     form = forms.UserFollowForm()

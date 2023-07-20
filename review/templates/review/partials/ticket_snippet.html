@@ -29,8 +29,14 @@
             style="mask-image: url('{% static 'images/edit.svg'%}')"
                 >
                     <a href="{% url 'edit_ticket' ticket.id %}"></a>
-                </div>
             </div>
+            <div
+            class="delete"
+            style="mask-image: url('{% static 'images/delete.svg'%}')"
+            >
+                <a href="{% url 'delete_ticket' ticket.id %}"></a>
+            </div>
+        </div>
         {% endif %}
     </div>
 </div>

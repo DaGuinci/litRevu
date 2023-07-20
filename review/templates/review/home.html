@@ -5,6 +5,11 @@
 {% block content %}
 
 <div class="content__home">
+    {% for message in messages %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
     <div class="content__home__buttons">
         <a class='btn' href="{% url 'add_review' %}">Ajouter une critique</a>
         <a class='btn' href="{% url 'add_ticket' %}">Demander une critique</a>

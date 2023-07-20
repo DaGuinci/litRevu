@@ -37,7 +37,8 @@ def log_user_in(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect')
+                messages.error(request,
+                               'Nom d\'utilisateur ou mot de passe incorrect')
                 return redirect('login')
     return render(request, 'review/login.html', context={'form': form})
 
@@ -71,7 +72,6 @@ def user_posts(request):
     reviews = tools.get_user_reviews(request.user)
     tickets = tools.get_user_tickets(request.user)
 
-
     if len(reviews) > 0:
         # préparer des iterateurs pour les etoiles dans le html
         for review in reviews:
@@ -85,8 +85,7 @@ def user_posts(request):
         )
     return render(request,
                   'review/user_posts.html',
-                  {'posts': posts,
-                   'animation': True}
+                  {'posts': posts}
                   )
 
 
@@ -116,19 +115,34 @@ def add_review(request):
 def add_review_to(request, ticket_id):
     form = forms.CreateReviewForm()
     ticket = models.Ticket.objects.get(id=ticket_id)
-    if request.method == 'POST':
-        form = forms.CreateReviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            # TODO populate ticket
-            review.ticket_id = ticket_id
-            review.save()
-            return redirect('home')
-    return render(request, 'review/add_review.html', context={
-        'review_form': form,
-        'ticket': ticket
-        })
+
+    # Vérifier qu'aucun utilisateur n'a dèjá répondu
+    try:
+        ticket_has_response = models.Review.objects.get(
+            ticket_id = ticket_id
+        )
+    except models.Review.DoesNotExist:
+        ticket_has_response = False
+
+    if not ticket_has_response:
+        if request.method == 'POST':
+            form = forms.CreateReviewForm(request.POST)
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.user = request.user
+                review.ticket_id = ticket_id
+                review.save()
+                return redirect('home')
+        return render(request, 'review/add_review.html', context={
+            'review_form': form,
+            'ticket': ticket
+            })
+    else:
+        messages.error(
+            request,
+            'Ce billet a déjà été traité.'
+                )
+        return redirect('home')
 
 
 @login_required
@@ -148,9 +162,9 @@ def edit_review(request, id):
             form = forms.CreateReviewForm(instance=review)
 
         return render(request,
-                    'review/edit_post.html',
-                    {'form': form}
-                    )
+                      'review/edit_post.html',
+                      {'form': form}
+                      )
 
     else:
         return home(request)
@@ -177,6 +191,7 @@ def delete_review(request, id):
 
     else:
         return home(request)
+
 
 @login_required
 def add_ticket(request):
@@ -208,9 +223,9 @@ def edit_ticket(request, id):
             form = forms.CreateTicketForm(instance=ticket)
 
         return render(request,
-                    'review/edit_post.html',
-                    {'form': form}
-                    )
+                      'review/edit_post.html',
+                      {'form': form}
+                      )
 
     else:
         return home(request)
@@ -324,4 +339,3 @@ def subscribes(request):
         'followed': followed,
         'followers': followers
         })
-

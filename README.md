@@ -50,9 +50,10 @@ Tasks related to new content.
 * [ ] Ajouter des animations css
 * [ ] Repasser l'historique du projet
 * [x] Repasser les critères d'évaluation
-* [ ] Empecher la reponse aux billets deja traites, en backend
+* [x] Empecher la reponse aux billets deja traites, en backend
 * [ ] titre/texte alternatifs aux images, aux liens
 * [ ] design accessible
 * [ ] générer rapport flake8
-* [ ] Supprimer bouton repondre en cours de reponse
-* [ ] Mettre en place les msg d'erreurs sur home
+* [x] Supprimer bouton repondre en cours de reponse
+* [x] Mettre en place les msg d'erreurs sur home
+* [ ] Reserver la modif et suppression des post a la page posts

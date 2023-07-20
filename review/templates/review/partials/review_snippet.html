@@ -36,19 +36,19 @@
         {% endif %}
     </div>
     {% endif %}
-    {% if user == review.user %}
+    {% if user == review.user and buttons_display %}
     <div class="edit_buttons">
         <div
         class="delete"
         style="mask-image: url('{% static 'images/edit.svg'%}')"
         >
-            <a href="{% url 'edit_review' review.id %}"></a>
+            <a href="{% url 'edit_review' review.id %}" title="Modifier la critique"></a>
         </div>
         <div
         class="delete"
         style="mask-image: url('{% static 'images/delete.svg'%}')"
         >
-            <a href="{% url 'delete_review' review.id %}"></a>
+            <a href="{% url 'delete_review' review.id %}" title="Supprimer la critique"></a>
         </div>
 
     </div>

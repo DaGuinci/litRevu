@@ -179,12 +179,14 @@ form .subtitle {
 .reviewBlock .edit_buttons {
   display: flex;
   justify-content: flex-end;
+  gap: 15px;
 }
 .reviewBlock .edit_buttons .delete {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   mask-size: contain;
-  background: #670280;
+  mask-repeat: no-repeat;
+  background: #EEB258;
   cursor: pointer;
 }
 .reviewBlock .edit_buttons .delete a {
@@ -322,7 +324,6 @@ form .subtitle {
 }
 .subscribes_section ul {
   width: 80%;
-  margin: 50px;
 }
 .subscribes_section ul li {
   width: 100%;

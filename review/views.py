@@ -85,7 +85,8 @@ def user_posts(request):
         )
     return render(request,
                   'review/user_posts.html',
-                  {'posts': posts}
+                  {'posts': posts,
+                   'buttons_display': True}
                   )
 
 

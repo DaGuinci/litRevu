@@ -28,24 +28,21 @@ from review import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    # path('login/', LoginView.as_view(
-    #     template_name='review/login.html',
-    #     redirect_authenticated_user=True),
-    #     name='login'),
+    path('posts/', views.user_posts, name='user_posts'),
     path('login/', views.log_user_in, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', views.signup_page, name='signup'),
     path('add-review/', views.add_review, name='add_review'),
-    path('edit-review/<int:id>', views.edit_review, name='edit_review'),
-    path('delete-review/<int:id>', views.delete_review, name='delete_review'),
-    path('add-ticket/', views.add_ticket, name='add_ticket'),
-    path('edit-ticket/<int:id>', views.edit_ticket, name='edit_ticket'),
-    path('delete-ticket/<int:id>', views.delete_ticket, name='delete_ticket'),
     path(
         'add-review-to/<int:ticket_id>',
         views.add_review_to,
         name='add_review_to'
         ),
+    path('edit-review/<int:id>', views.edit_review, name='edit_review'),
+    path('delete-review/<int:id>', views.delete_review, name='delete_review'),
+    path('add-ticket/', views.add_ticket, name='add_ticket'),
+    path('edit-ticket/<int:id>', views.edit_ticket, name='edit_ticket'),
+    path('delete-ticket/<int:id>', views.delete_ticket, name='delete_ticket'),
     path('subscribes/', views.subscribes, name='subscribes'),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

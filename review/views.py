@@ -46,10 +46,11 @@ def log_user_in(request):
 def home(request):
     reviews = tools.get_user_viewable_reviews(request.user)
 
-    # préparer des iterateurs pour les etoiles dans le html
-    for review in reviews:
-        review.rate_iterator = range(review.rating)
-        review.unrate_iterator = range(5 - review.rating)
+    if len(reviews) > 0:
+        # préparer des iterateurs pour les etoiles dans le html
+        for review in reviews:
+            review.rate_iterator = range(review.rating)
+            review.unrate_iterator = range(5 - review.rating)
 
     tickets = tools.get_user_viewable_tickets(request.user)
 
@@ -63,6 +64,31 @@ def home(request):
                   {'posts': posts,
                    'animation': True}
                   )
+
+
+@login_required
+def user_posts(request):
+    reviews = tools.get_user_reviews(request.user)
+    tickets = tools.get_user_tickets(request.user)
+
+
+    if len(reviews) > 0:
+        # préparer des iterateurs pour les etoiles dans le html
+        for review in reviews:
+            review.rate_iterator = range(review.rating)
+            review.unrate_iterator = range(5 - review.rating)
+
+    posts = sorted(
+        chain(reviews, tickets),
+        key=lambda instance: instance.time_created,
+        reverse=True
+        )
+    return render(request,
+                  'review/user_posts.html',
+                  {'posts': posts,
+                   'animation': True}
+                  )
+
 
 @login_required
 def add_review(request):
@@ -86,6 +112,7 @@ def add_review(request):
         })
 
 
+@login_required
 def add_review_to(request, ticket_id):
     form = forms.CreateReviewForm()
     ticket = models.Ticket.objects.get(id=ticket_id)
@@ -210,6 +237,7 @@ def delete_ticket(request, id):
 
     else:
         return home(request)
+
 
 @login_required
 def subscribes(request):

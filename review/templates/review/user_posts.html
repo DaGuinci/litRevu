@@ -1,0 +1,16 @@
+{% extends 'review/base.html' %}
+{% load static %}
+{% load blog_extras %}
+
+{% block content %}
+
+<div class="content__home__feed">
+    {% for post in posts %}
+        {% if post|model_type == 'Review' %}
+            {% include 'review/partials/review_snippet.html' with review=post %}
+        {% elif post|model_type == 'Ticket' %}
+            {% include 'review/partials/ticket_snippet.html' with ticket=post display=True %}
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}

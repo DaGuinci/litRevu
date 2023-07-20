@@ -105,7 +105,7 @@ form .subtitle {
   align-items: center;
   width: 1000px;
   margin: auto;
-  padding-top: 75px;
+  padding: 75px 0;
 }
 
 .reviewBlock {

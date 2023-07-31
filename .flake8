@@ -1,0 +1,6 @@
+[flake8]
+
+exclude = env
+max-line-length = 119
+format=html
+htmldir=flake-report

@@ -7,7 +7,7 @@ from . import models
 class LoginForm(forms.Form):
     username = forms.CharField(
         label='',
-        widget=forms.TextInput(attrs={'placeholder':'Nom d\'utilisateur'})
+        widget=forms.TextInput(attrs={'placeholder': 'Nom d\'utilisateur'})
         )
     password = forms.CharField(
         label='',

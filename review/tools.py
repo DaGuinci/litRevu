@@ -52,7 +52,6 @@ def get_user_viewable_reviews(user):
         if response:
             all_reviews.append(response)
 
-
     # Récupérer les critiques du user connecté
     user_reviews = get_user_reviews(user)
 

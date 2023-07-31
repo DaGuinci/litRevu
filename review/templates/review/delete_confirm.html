@@ -4,10 +4,10 @@
 
 <form method="POST">
     {% csrf_token %}
-    {{review}}
-    <p>Souhaitez-vous vraiment supprimer la critique de "{{review.ticket.title}}" ?</p>
+    <p>Souhaitez-vous vraiment supprimer la critique ou le billet de "{{title}}" ?</p>
+    <dd>(si vous supprimer un billet ayant une réponse, la critique associée sera également supprimée)</dd>
     <button type="submit">Confirmer</button>
-    <a href="{% url 'home' %}">Annuler</a>
+    <a class="cancel" href="{% url 'home' %}">Annuler</a>
 </form>
 
 {% endblock content %}

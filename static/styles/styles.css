@@ -68,6 +68,10 @@ ul {
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+.cancel {
+  color: #EEB258;
+}
+
 form {
   display: flex;
   flex-direction: column;

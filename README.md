@@ -45,12 +45,11 @@ sass static/styles/styles.scss static/styles/styles.css --watch
 Tasks related to new content.
 
 * [x] Supprimer l'animation de la page posts
-* [ ] Ajouter des animations css
-* [ ] Repasser l'historique du projet
+* [x] Repasser l'historique du projet
 * [x] Repasser les critères d'évaluation
 * [x] Empecher la reponse aux billets deja traites, en backend
-* [ ] titre/texte alternatifs aux images, aux liens
-* [ ] design accessible
+* [x] titre/texte alternatifs aux images, aux liens
+* [x] design accessible
 * [ ] générer rapport flake8
 * [x] Supprimer bouton repondre en cours de reponse
 * [x] Mettre en place les msg d'erreurs sur home

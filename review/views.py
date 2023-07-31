@@ -187,7 +187,8 @@ def delete_review(request, id):
         else:
             return render(request,
                           'review/delete_confirm.html',
-                          {'review': review}
+                          {'post': review,
+                           'title': review.ticket.title}
                           )
 
     else:
@@ -240,6 +241,14 @@ def delete_ticket(request, id):
 
     if ticket.user == request.user:
         if request.method == 'POST':
+            # si une réponse a été apportée, supprimer la réponse
+            try:
+                review = models.Review.objects.get(ticket_id=ticket.id)
+            except models.Review.DoesNotExist:
+                review = None
+            if review:
+                review.delete()
+
             ticket.delete()
             return render(request,
                           'review/delete_success.html',
@@ -248,7 +257,8 @@ def delete_ticket(request, id):
         else:
             return render(request,
                           'review/delete_confirm.html',
-                          {'ticket': ticket}
+                          {'post': ticket,
+                           'title': ticket.title}
                           )
 
     else:

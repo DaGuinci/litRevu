@@ -41,11 +41,12 @@ def get_user_viewable_reviews(user):
         )
         all_reviews += list(reviews)
 
+    # Ajouter les réponse aux billets de l'user, même d'users non suivis
     user_tickets = get_user_tickets(user)
     for ticket in user_tickets:
         try:
             response = models.Review.objects.get(ticket_id=ticket.id)
-        except:
+        except models.Review.DoesNotExist:
             response = None
 
         if response:

@@ -22,7 +22,6 @@ from django.contrib.auth.views import (
     )
 from django.urls import include, path
 from review import views
-# from authentication import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),

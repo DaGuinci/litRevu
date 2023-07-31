@@ -14,27 +14,28 @@
         <p>{{ ticket.description }}</p>
         {% endif %}
         {% if ticket.image %}
-        <div class="thumbnail"
-        style="background-image: url('{{ ticket.image.url }}')"
+        <img
+        class="thumbnail"
+        src="{{ ticket.image.url }}"
+        alt="Illustration {{ ticket.title }}"
         >
-        </div>
         {% endif %}
-        {% if display and ticket.user != user and not ticket|has_response %}
+        {% if display and not ticket|has_response %}
         <a class="btn" href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
         {% endif %}
-        {% if user == ticket.user %}
+        {% if user == ticket.user and buttons_display %}
         <div class="edit_buttons">
             <div
             class="delete"
             style="mask-image: url('{% static 'images/edit.svg'%}')"
                 >
-                    <a href="{% url 'edit_ticket' ticket.id %}"></a>
+                    <a href="{% url 'edit_ticket' ticket.id %}" title="Modifier le billet"></a>
             </div>
             <div
             class="delete"
             style="mask-image: url('{% static 'images/delete.svg'%}')"
             >
-                <a href="{% url 'delete_ticket' ticket.id %}"></a>
+                <a href="{% url 'delete_ticket' ticket.id %}" title="Supprimer le billet"></a>
             </div>
         </div>
         {% endif %}

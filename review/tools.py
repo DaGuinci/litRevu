@@ -39,8 +39,18 @@ def get_user_viewable_reviews(user):
         reviews = models.Review.objects.filter(
             user=followed
         )
-        for review in list(reviews):
-            all_reviews.append(review)
+        all_reviews += list(reviews)
+
+    user_tickets = get_user_tickets(user)
+    for ticket in user_tickets:
+        try:
+            response = models.Review.objects.get(ticket_id=ticket.id)
+        except:
+            response = None
+
+        if response:
+            all_reviews.append(response)
+
 
     # Récupérer les critiques du user connecté
     user_reviews = get_user_reviews(user)
@@ -69,8 +79,7 @@ def get_user_viewable_tickets(user):
         tickets = models.Ticket.objects.filter(
             user=followed
         )
-        for ticket in list(tickets):
-            all_tickets.append(ticket)
+        all_tickets += list(tickets)
 
     # Récupérer les tickets du user connecté
     user_tickets = get_user_tickets(user)

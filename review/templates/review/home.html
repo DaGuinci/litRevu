@@ -23,57 +23,6 @@
                 {% include 'review/partials/ticket_snippet.html' with ticket=post display=True %}
             {% endif %}
         {% endfor %}
-{% comment %}
-        {% for review in reviews %}
-        <div class="reviewBlock">
-            <div class="reviewBlock__infos">
-                <p>{{ review.user }} a publié une critique</p>
-                <p> {{ review.time_created }} </p>
-            </div>
-            <div class="reviewBlock__headline">
-                <h3>{{ review.headline }}</h3>
-                <div class="reviewBlock__headline__rate">
-                    {% for star in review.rate_iterator %}
-                    <div class="star"
-                    style="mask-image: url('{% static 'images/filled_star.png' %}')">
-                    </div>
-                    {% endfor %}
-                    {% for star in review.unrate_iterator %}
-                    <div class="star"
-                    style="mask-image: url('{% static 'images/empty_star.png' %}')">
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="reviewBlock__body">
-                <p>{{ review.body }}</p>
-            </div>
-        </div>
-        {% endfor %}
-
-        {% for ticket in tickets %}
-        <div class="reviewBlock">
-            <div class="reviewBlock__infos">
-                <p>{{ ticket.user }} a demandé une critique</p>
-                <p>{{ ticket.time_created }}</p>
-            </div>
-            <div class="reviewBlock__headline">
-                <h3>{{ ticket.title }}</h3>
-            </div>
-            <div class="reviewBlock__body">
-                {% if ticket.description %}
-                <p>{{ ticket.description }}</p>
-                {% endif %}
-                {% if ticket.image %}
-                <div class="thumbnail"
-                style="background-image: url('{{ ticket.image.url }}')"
-                >
-                </div>
-                {% endif %}
-                <a class="btn" href="{% url 'add_review_to' ticket.id %}">Ajouter une critique</a>
-            </div>
-        </div>
-        {% endfor %} {% endcomment %}
     </div>
 </div>
 

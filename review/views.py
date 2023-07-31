@@ -120,7 +120,7 @@ def add_review_to(request, ticket_id):
     # Vérifier qu'aucun utilisateur n'a dèjá répondu
     try:
         ticket_has_response = models.Review.objects.get(
-            ticket_id = ticket_id
+            ticket_id=ticket_id
         )
     except models.Review.DoesNotExist:
         ticket_has_response = False

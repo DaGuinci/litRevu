@@ -40,8 +40,6 @@ python xxx.py
 sass static/styles/styles.scss static/styles/styles.css --watch
 ```
 
-This is the markdown todo file for project a.
-
 ## Content
 
 Tasks related to new content.
@@ -56,4 +54,4 @@ Tasks related to new content.
 * [ ] générer rapport flake8
 * [x] Supprimer bouton repondre en cours de reponse
 * [x] Mettre en place les msg d'erreurs sur home
-* [ ] Reserver la modif et suppression des post a la page posts
+* [x] Reserver la modif et suppression des post a la page posts

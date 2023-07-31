@@ -24,4 +24,4 @@ env.bak/
 venv.bak/
 
 # Media
-# .media
+media/

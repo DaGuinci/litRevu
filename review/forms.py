@@ -69,6 +69,7 @@ class CreateReviewForm(forms.ModelForm):
 
 
 class CreateTicketForm(forms.ModelForm):
+    image = forms.ImageField(required=True)
     class Meta:
         model = models.Ticket
         exclude = [
@@ -83,7 +84,7 @@ class CreateTicketForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Titre'}),
-            'description': forms.Textarea(attrs={'placeholder': 'Description'})
+            'description': forms.Textarea(attrs={'placeholder': 'Description'}),
         }
 
 

@@ -1,4 +1,4 @@
-\# DaGuinci \- LitReview support
+# DaGuinci - LitReview support
 
 ## Installation
 

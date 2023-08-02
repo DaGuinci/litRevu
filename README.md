@@ -30,23 +30,17 @@ sass static/styles/styles.scss static/styles/styles.css --watch
 * Lancer le serveur
 
 ``` bash
-/projectLab python manage.py runserver
+python manage.py runserver
 ```
 
 
 ## Utilisateurs crées pour test:
 
-Utilisateur:
-JeanDupont
-Mot de passe:
-oc-pass23
+Utilisateur: JeanDupont\
+Mot de passe: oc-pass23
 
-Utilisateur:
-PierreDuchemein
-Mot de passe:
-oc-pass23
+Utilisateur: PierreDuchemein\
+Mot de passe: oc-pass23
 
-Utilisateur:
-JacquesDurand
-Mot de passe:
-oc-pass23
+Utilisateur: JacquesDurand\
+Mot de passe: oc-pass23

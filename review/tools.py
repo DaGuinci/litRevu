@@ -49,7 +49,7 @@ def get_user_viewable_reviews(user):
         except models.Review.DoesNotExist:
             response = None
 
-        if response:
+        if response and response.user != user:
             all_reviews.append(response)
 
     # Récupérer les critiques du user connecté

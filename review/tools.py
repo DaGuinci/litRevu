@@ -41,7 +41,7 @@ def get_user_viewable_reviews(user):
         )
         all_reviews += list(reviews)
 
-    # Ajouter les réponse aux billets de l'user, même d'users non suivis
+    # Ajouter les réponse aux billets de l'user,  pour les users non suivis
     user_tickets = get_user_tickets(user)
     for ticket in user_tickets:
         try:
@@ -50,7 +50,8 @@ def get_user_viewable_reviews(user):
             response = None
 
         if response and response.user != user:
-            all_reviews.append(response)
+            if response.user not in followeds:
+                all_reviews.append(response)
 
     # Récupérer les critiques du user connecté
     user_reviews = get_user_reviews(user)

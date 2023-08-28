@@ -70,6 +70,7 @@ class CreateReviewForm(forms.ModelForm):
 
 class CreateTicketForm(forms.ModelForm):
     image = forms.ImageField(required=True)
+
     class Meta:
         model = models.Ticket
         exclude = [

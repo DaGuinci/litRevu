@@ -36,11 +36,14 @@ python manage.py runserver
 
 ## Utilisateurs crées pour test:
 
-Utilisateur: JeanDupont\
+Utilisateur: JeanDupont
 Mot de passe: oc-pass23
 
-Utilisateur: PierreDuchemein\
+Utilisateur: PierreDuchemein
 Mot de passe: oc-pass23
 
-Utilisateur: JacquesDurand\
+Utilisateur: JacquesDurand
+Mot de passe: oc-pass23
+
+Utilisateur: MarcDumoulin
 Mot de passe: oc-pass23

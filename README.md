@@ -3,7 +3,7 @@
 LitReview is a platform for readers to share reviews and opinions about the books they have read.
 
 ![Language](https://img.shields.io/badge/Code-Django-blue?logo=django)
-![Status](https://img.shields.io/badge/status-development-orange)
+![Status](https://img.shields.io/badge/status-study_project-blue)
 
 ---
 

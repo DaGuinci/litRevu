@@ -1,49 +1,104 @@
-# DaGuinci - LitReview support
+# 📚 LitReview
 
-## Installation
+LitReview is a platform for readers to share reviews and opinions about the books they have read.
 
-* Créer environnement virtuel :
+![Language](https://img.shields.io/badge/Code-Django-blue?logo=django)
+![Status](https://img.shields.io/badge/status-development-orange)
 
-``` bash
-python -m venv env
-```
+---
 
-* Activer environnement virtuel :
+## 📖 Overview
 
-``` bash
-source env/bin/activate
-```
+LitReview provides a friendly space for book enthusiasts where they can:
+- Publish reviews and opinions about their readings
+- Discover recommendations from other users
+- Interact with a community of readers
 
-* Installer dépendances
+---
 
-``` bash
-pip install -r requirements.txt
-```
+## 🌟 Features
 
-* Si besoin de modifier les styles, installer [sass](https://sass-lang.com/install/)
+LitReview offers the following functionalities:
+- **Request a review**: Users can open a ticket to request feedback on a book.
+- **Follow other users**: Stay updated with the activity of other readers.
+- **Respond to tickets**: Provide feedback on a ticket, as long as no one else has already responded.
+- **View personalized feed**: Display a feed that includes reviews and tickets from followed users, as well as the user's own reviews and tickets.
+- **Manage profile**: Users can create, update, and delete their profile.
 
-``` bash
-sass static/styles/styles.scss static/styles/styles.css --watch
-```
-## Exécution
+---
 
-* Lancer le serveur
+## 🖥️ Demo
 
-``` bash
-python manage.py runserver
-```
+> 📷 *Screenshot*
+![Demo](assets/screenshot.png)
 
+---
 
-## Utilisateurs crées pour test:
+## 🚀 Installation
 
-Utilisateur: JeanDupont
-Mot de passe: oc-pass23
+1. **Create a virtual environment**:
+   ```bash
+   python -m venv env
+   ```
 
-Utilisateur: PierreDuchemein
-Mot de passe: oc-pass23
+2. **Activate the virtual environment**:
+   ```bash
+   source env/bin/activate
+   ```
 
-Utilisateur: JacquesDurand
-Mot de passe: oc-pass23
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Utilisateur: MarcDumoulin
-Mot de passe: oc-pass23
+4. **Modify styles (optional)**:
+   If you want to customize the styles, install [Sass](https://sass-lang.com/install) and use the following command:
+   ```bash
+   sass static/styles/styles.scss static/styles/styles.css --watch
+   ```
+
+---
+
+## 🖥️ Running the Project
+
+1. **Start the server**:
+   ```bash
+   python manage.py runserver
+   ```
+
+2. **Access the site**:
+   Open your browser and go to [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+---
+
+## 👤 Test Users
+
+You can use the following accounts to test the site:
+
+| Username          | Password    |
+|-------------------|-------------|
+| JeanDupont        | oc-pass23   |
+| PierreDuchemein   | oc-pass23   |
+| JacquesDurand     | oc-pass23   |
+| MarcDumoulin      | oc-pass23   |
+
+---
+
+## 💡 Technologies Used
+
+- **Django** (main framework)
+- **Pillow** (image processing)
+- **sqlparse** (SQL parsing)
+- **flake8** (code linting)
+- **django-browser-reload** (automatic browser reload)
+
+---
+
+## 👤 About the Developer
+
+<div align="center">
+  <p>Developed by <a href="https://evendev.net"><strong>Guillaume Even</strong></a></p>
+  <a href="https://evendev.net">
+    <img src="https://evendev.net/img/logo.svg" alt="evendev logo" width="100"/>
+  </a>
+</div>
